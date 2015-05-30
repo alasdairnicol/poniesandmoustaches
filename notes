@@ -1,0 +1,14 @@
+what's a moustache
+wrote about it at https://myks.org/en/multiple-template-engines-for-django/
+
+differences between django and jinja2
+
+{% for conference in conference.talks.all %}
+
+{% for conference in conference.talks.all() %}
+
+{% for field in fields %}
+{{ conference[field] }}
+{% endfor %}
+
+further reading

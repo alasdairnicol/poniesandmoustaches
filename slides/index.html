@@ -49,7 +49,7 @@
 				</section>
 
 				<section>
-					<h2>{{ greeting }}</h2>
+					<h2>Hi</h2>
 					<ul>
 					  <li>Alasdair Nicol</li>
 					  <li>Developer at Memset Hosting</li>
@@ -58,8 +58,108 @@
 				</section>
 
 				<section>
-				  <h2>What's a template engine?</h2>
-				  <p>Django is a <strong>M</strong>odel <strong>T</strong>emplate <strong>V</strong>iew framework</p>
+				  <h2>Django Releases</h2>
+				  <p>Django 1.0 - September 2008</p>
+				  <p>Django 1.8 released - April 2015</p>
+
+				</section>
+				
+				<section>
+				  <h2>Django 1.8 Highlights</h2>
+				  <p>API for Model._meta</p>
+				  <p>New contrib.postgres</p>
+				  <p>Support for <strong>multiple template engines</strong></p>				  
+				</section>
+				
+				<section>
+				  <h2>Before Django 1.8</h2>
+				  <p class="fragment">Single Template Engine</p>
+				  <p class="fragment">Django Template Language</p>
+				</section>
+
+				<section>
+				  <h2>Swappable Components: Databases</h2>
+				  <ul>
+				    <li class="fragment">PostgreSQL</li>
+				    <li class="fragment">MySQL</li>
+				    <li class="fragment">SQLite</li>
+				    <li class="fragment">Oracle</li>
+				    <li class="fragment">IBM DB2 (third party)</li>
+				    <li class="fragment">MS SQL (third party)</li>
+				  </ul>
+				</section>
+
+				<section>
+				  <h2>Swappable Components: Sessions</h2>
+				  <ul>
+				    <li class="fragment">Database</li>
+				    <li class="fragment">Signed Cookies</li>
+				    <li class="fragment">Files</li>
+				  </ul>
+				</section>
+
+				<section>
+				  <h2>Swappable Components: Caching</h2>
+				  <ul>
+				    <li class="fragment">Memcached</li>
+				    <li class="fragment">Redis (3rd party)</li>
+				  </ul>
+				</section>
+
+				<section>
+				  <h2>Before Django 1.8</h2>
+				  <p>Single Template Engine</p>
+				  <p>Django Template Language</p>
+				</section>
+
+				
+				<section>
+				  <h2>Proposal - Replace Django Template Language with Jinja2</h2>
+				  <ul>
+				    <li>Backwards incompatible</li>
+				    <li>Difference in philosophies</li>
+				  </ul>
+				</section>
+				
+				<section>
+				  <h2>Multiple Template Engines in Django 1.8</h2>
+				  <p>Crowd funded campaign launched by Aymeric Augustin</p>
+				  <ul class="fragment">
+				    <li>Keep existing Django template language</li>
+				    <li>Add support for Jinja2 out of the box</li>
+				    <li>Define an API for integrating other template engines</li>
+				  </ul>
+				</section>
+
+				<section>
+				  <h2>Rendering Templates</h3>
+				  <div class="fragment">
+				    <p>Start with a template</p>
+				  <pre><code>Hello, my name is {{ name }}.
+Today I'm going to talk about {{ subject }}.</code></pre>
+				  </div>
+				  <div class="fragment">
+				    <p>Context</p>
+				  <pre><code>{
+    'name': 'Alasdair',
+    'subject': 'Ponies and Moustaches',
+}</code></pre>
+				  </div>
+				  <div class="fragment">
+				    <p>Rendered Template</p>
+				  <pre><code>Hello, my name is Alasdair.
+Today I'm going to talk about Ponies and Moustaches.</code></pre>
+				  </div>
+				</section>
+
+				<section>
+				  <h2>Final Webpage</h2>
+				  <img src="djangcon-history.png" />
+				</section>
+				
+				<section>
+				  <h2>Model Template View</h2>
+				  <p>Django is an MTV framework</p>
 				  <p>Other frameworks use acronym <strong>M</strong>odel <strong>V</strong>iew <strong>C</strong>ontroller</p>
 				</section>
 
@@ -108,100 +208,11 @@
 				</section>
 
 				<section>
-				  <h2>Final Webpage</h2>
-				  <img src="djangcon-history.png" />
-				</section>
-
-				<section>
-				  <h2>Template Engines before Django 1.8</h2>
-				  <ul>
-				    <li class="fragment">Django Template Language</li>
-				    <li class="fragment">that's it</li>
-				  </ul>
-				</section>
-
-				<section>
-				  <h2>Swappable Components: Databases</h2>
-				  <ul>
-				    <li class="fragment">PostgreSQL</li>
-				    <li class="fragment">MySQL</li>
-				    <li class="fragment">SQLite</li>
-				    <li class="fragment">Oracle</li>
-				    <li class="fragment">IBM DB2 (third party)</li>
-				    <li class="fragment">MS SQL (third party)</li>
-				  </ul>
-				</section>
-
-				<section>
-				  <h2>Swappable Components: Sessions</h2>
-				  <ul>
-				    <li class="fragment">Cookies</li>
-				    <li class="fragment">Database</li>
-				    <li class="fragment">Files</li>
-				  </ul>
-				</section>
-
-				<section>
-				  <h2>Swappable Components: Caching</h2>
-				  <ul>
-				    <li class="fragment">Memcached</li>
-				    <li class="fragment">Redis (3rd party)</li>
-				  </ul>
-				</section>
-
-				<section>
-				  <h2>Multiple Template Engines in Django 1.8</h2>
-				  <p>Crowd funded campaign launched by Aymeric Augustin</p>
-				  <ul>
-				    <li>Keep existing Django template language</li>
-				    <li>Add support for Jinja2 out of the box</li>
-				    <li>Define an API for integrating other template engines</li>
-				  </ul>
-				</section>
-
-				<section>
 				  <h2>Jinja2</h2>
+				  <p>Out of the box support in Django 1.8</p>
 				  <p>Modelled after Django's template language</p>
 				  <p>Fast</p>
 				  <p>Used by Flask, Ansible</p>
-				</section>
-
-				<section>
-				  <h2>Adding Jinja2 Templates to an existing project</h2>
-				  <pre><code class="hljs python">TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]</code></pre>
-				</section>
-
-				<section>
-				  <h3>Enabling Jinja2 in settings.py</h3>
-				  <pre><code class="hljs python">TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]</code></pre>
 				</section>
 
 				<section>
@@ -221,6 +232,16 @@
         'APP_DIRS': True,
     },				      
 ]</code></pre>
+				</section>
+
+				<section>
+				  <h2>Further Reading</h2>
+				  <ul>
+				    <li>Project updates - https://myks.org/en/multiple-template-engines-for-django/</li>
+				    <li>Django DEPs - https://github.com/django/deps</li>
+				    <li>Django Design Philosophy - https://docs.djangoproject.com/en/1.8/misc/design-philosophies/</li>
+				  </ul>
+				  <p>http://alasdairnicol.github.io/poniesandmoustaches</p>
 				</section>
 
 
