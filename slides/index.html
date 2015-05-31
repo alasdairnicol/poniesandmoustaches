@@ -58,19 +58,32 @@
 				</section>
 
 				<section>
-				  <h2>Django Releases</h2>
-				  <p>Django 1.0 - September 2008</p>
-				  <p>Django 1.8 released - April 2015</p>
-
-				</section>
-				
-				<section>
 				  <h2>Django 1.8 Highlights</h2>
 				  <p>API for Model._meta</p>
 				  <p>New contrib.postgres</p>
-				  <p>Support for <strong>multiple template engines</strong></p>				  
+				  <p>Support for <strong>multiple template engines</strong></p>
 				</section>
-				
+
+								<section>
+				  <h2>Rendering Templates</h3>
+				  <div class="fragment">
+				    <p>Start with a template</p>
+				  <pre><code>Hello, my name is {{ name }}.
+Today I'm going to talk about {{ subject }}.</code></pre>
+				  </div>
+				  <div class="fragment">
+				    <p>Context</p>
+				  <pre><code>{
+    'name': 'Alasdair',
+    'subject': 'Ponies and Moustaches',
+}</code></pre>
+				  </div>
+				  <div class="fragment">
+				    <p>Rendered Template</p>
+				  <pre><code>Hello, my name is Alasdair.
+Today I'm going to talk about Ponies and Moustaches.</code></pre>
+				  </div>
+				</section>
 				<section>
 				  <h2>Before Django 1.8</h2>
 				  <p class="fragment">Single Template Engine</p>
@@ -107,21 +120,6 @@
 				</section>
 
 				<section>
-				  <h2>Before Django 1.8</h2>
-				  <p>Single Template Engine</p>
-				  <p>Django Template Language</p>
-				</section>
-
-				
-				<section>
-				  <h2>Proposal - Replace Django Template Language with Jinja2</h2>
-				  <ul>
-				    <li>Backwards incompatible</li>
-				    <li>Difference in philosophies</li>
-				  </ul>
-				</section>
-				
-				<section>
 				  <h2>Multiple Template Engines in Django 1.8</h2>
 				  <p>Crowd funded campaign launched by Aymeric Augustin</p>
 				  <ul class="fragment">
@@ -132,31 +130,10 @@
 				</section>
 
 				<section>
-				  <h2>Rendering Templates</h3>
-				  <div class="fragment">
-				    <p>Start with a template</p>
-				  <pre><code>Hello, my name is {{ name }}.
-Today I'm going to talk about {{ subject }}.</code></pre>
-				  </div>
-				  <div class="fragment">
-				    <p>Context</p>
-				  <pre><code>{
-    'name': 'Alasdair',
-    'subject': 'Ponies and Moustaches',
-}</code></pre>
-				  </div>
-				  <div class="fragment">
-				    <p>Rendered Template</p>
-				  <pre><code>Hello, my name is Alasdair.
-Today I'm going to talk about Ponies and Moustaches.</code></pre>
-				  </div>
-				</section>
-
-				<section>
-				  <h2>Final Webpage</h2>
+				  <h2>Example Webpage</h2>
 				  <img src="djangcon-history.png" />
 				</section>
-				
+
 				<section>
 				  <h2>Model Template View</h2>
 				  <p>Django is an MTV framework</p>
@@ -187,32 +164,30 @@ Today I'm going to talk about Ponies and Moustaches.</code></pre>
 
 				<section>
 				  <h2>Model <strong>Template</strong> View</h2>
-				  <p>How the data is presented</p>
+				  <p>Django Template Language</p>
 				  <pre class="fragment"><code class="hljs django">&lt;h1&gt;Django Con Europe History&lt;/h1&gt;
-&lt;table class=&quot;table&quot;&gt;
-  &lt;thead&gt;
+&lt;table&gt;
     &lt;tr&gt;
       &lt;th&gt;Year&lt;/th&gt;
       &lt;th&gt;Location&lt;/th&gt;
     &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
     {% for conference in conferences %}
     &lt;tr class=&quot;{% cycle 'row1' 'row2' %}&quot;&gt;
       &lt;td&gt;{{ conference.year }}&lt;/td&gt;
       &lt;td&gt;{{ conference.location }}, {{ conference.country }}&lt;/td&gt;
     &lt;/tr&gt;
     {% endfor %}
-  &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
 				</section>
 
 				<section>
 				  <h2>Jinja2</h2>
-				  <p>Out of the box support in Django 1.8</p>
-				  <p>Modelled after Django's template language</p>
-				  <p>Fast</p>
-				  <p>Used by Flask, Ansible</p>
+				  <ul>
+				    <li>Out of the box support in Django 1.8</li>
+				    <li>Modelled after Django's template language</li>
+				    <li>Fast</li>
+				    <li>Used by Flask, Ansible</li>
+				  </ul>
 				</section>
 
 				<section>
@@ -230,29 +205,132 @@ Today I'm going to talk about Ponies and Moustaches.</code></pre>
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'APP_DIRS': True,
-    },				      
+    },
 ]</code></pre>
+				</section>
+				<section>
+								  <h2>Model <strong>Template</strong> View</h2>
+				  <p>Jinja2</p>
+				  <pre class="fragment"><code class="hljs django">&lt;h1&gt;Django Con Europe History&lt;/h1&gt;
+&lt;table&gt;
+    &lt;th&gt;Year&lt;/th&gt;
+    &lt;th&gt;Location&lt;/th&gt;
+    {% for conference in conferences %}
+    &lt;tr class="{{ loop.cycle('row1', 'row2') }}"&gt;
+      &lt;td&gt;{{ conference.year }}&lt;/td&gt;
+      &lt;td&gt;{{ conference.location }}, {{ conference.country }}&lt;/td&gt;
+    &lt;/tr&gt;
+    {% endfor %}
+&lt;/table&gt;</code></pre>
+				</section>
+
+				<section>
+				  <h2>Integrating another templating language</h2>
+				  <p class="fragment">Mustache</p>
+				  <ul>
+				    <li class="fragment">Available in Ruby, JavaScript, Python, Erlang, node.js, PHP, Perl, Perl6, Objective-C, Java, C#/.NET, Android, C++, Go, Lua, ooc, ActionScript, ColdFusion, Scala, Clojure, Fantom, CoffeeScript, D, Haskell, XQuery, ASP, Io, Dart, Haxe, Delphi, Racket, Rust, OCaml, Swift, and for Bash</li>
+				    <li class="fragment">Supported in Python thanks to Pystache</li>
+				    <li class="fragment">http://mustache.github.io</li>
+				    <li class="fragment">http://github.com/defunkt/pystache</li>
+				  </ul>
+				</section>
+
+				<section>
+				  <h2>Mustache Template Engine</h2>
+				  <pre><code class="hljs python">class Template(object):
+    def __init__(self, template):
+        self.template = template
+
+    def render(self, context=None, request=None):
+        if context is None:
+            context = {}
+        if request is not None:
+            context['request'] = request
+            context['csrf_input'] = csrf_input_lazy(request)
+            context['csrf_token'] = csrf_token_lazy(request)
+        return pystache.render(self.template, context)
+
+class Mustache(BaseEngine):
+    app_dirname = 'mustache'
+
+    def __init__(self, params):
+        options = params.pop('OPTIONS').copy()
+        super(Mustache, self).__init__(params)
+        self.renderer = pystache.Renderer(
+            search_dirs=self.template_dirs,
+            file_extension=False,
+        )
+
+    def from_string(self, template_code):
+        return Template(template_code)
+
+    def get_template(self, template_name):
+        try:
+            return Template(self.renderer.load_template(template_name))
+        except TemplateNotFoundError as exc:
+            raise TemplateDoesNotExist(exc.args)
+</code></pre>
+				</section>
+
+				<section>
+				  								  <h2>Model <strong>Template</strong> View</h2>
+				  <p>Mustache</p>
+
+				  <pre class="fragment"><code class="hljs mustache">&lt;h1&gt;Django Con Europe History&lt;/h1&gt;
+&lt;table class="table"&gt;
+  &lt;th&gt;Year&lt;/th&gt;
+  &lt;th&gt;Location&lt;/th&gt;
+  {{#conferences}}
+  &lt;tr&gt;
+    &lt;td&gt;{{ year }}&lt;/td&gt;
+    &lt;td&gt;{{ location }}, {{ country }}&lt;/td&gt;
+  &lt;/tr&gt;
+  {{/conferences}}
+&lt;/table&gt;</code></pre>
+				</section>
+
+				<section>
+				  <h2>Slight change required to the view</h2>
+				  <pre><code class="hljs python">def view_conferences(request):
+    """
+    View all of the conferences in one page
+    """
+    engine = request.GET.get('engine', 'django')
+    conferences = Conference.objects.all()
+    if engine == "mustache":
+        conferences = conferences.values()
+    return render(request, "view_conferences.html",
+        {'conferences': conferences}, using=engine)</code></pre>
+
+				</section>
+
+				<section>
+				  <h2>Success!</h2>
+				  <p>Our Django Pony has grown a mustache!</p>
+				  <img class="fragment" src="ponywithmoustache.jpg" width=500 height=500 />
+
 				</section>
 
 				<section>
 				  <h2>Further Reading</h2>
 				  <ul>
-				    <li>Project updates - https://myks.org/en/multiple-template-engines-for-django/</li>
-				    <li>Django DEPs - https://github.com/django/deps</li>
+				    <li>Multiple Templates Weekly updates - https://myks.org/en/multiple-template-engines-for-django/</li>
 				    <li>Django Design Philosophy - https://docs.djangoproject.com/en/1.8/misc/design-philosophies/</li>
+				    <li>Django DEPs - https://github.com/django/deps</li>
+				    <li>Two Scoops of Django 1.8 - chapter on Jinja2</li>
 				  </ul>
-				  <p>http://alasdairnicol.github.io/poniesandmoustaches</p>
 				</section>
 
 
 				<section>
 				  <h2>Any questions?</h2>
 				  <pre><code class="hljs django">&lt;ul&gt;
-  {% for question in Questions %}
+  {% for question in questions %}
   &lt;li&gt;{{ question.answer }}&lt;/li&gt;
   {% endfor %}
 &lt;/ul&gt;</code></pre>
-				  <p>
+				  <p>http://alasdairnicol.github.io/poniesandmoustaches</p>
+				  </p>
 				    <small>Alasdair Nicol | @al_sdair | http://al.sdair.co.uk</small>
 				  </p>
 				</section>
